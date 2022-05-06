@@ -5,6 +5,7 @@ declare global {
             URI: string;
             DB_NAME: string;
             MIDWESTERN_SEEDED_COLLECTION_NAME: string;
+            MIDWESTERN_CONTACT_COLLECTION_NAME: string;
         }
     }
 }
