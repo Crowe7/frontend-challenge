@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "nodemon dist/index.js",
     "build": "tsc -w",
-    "seed": "node dist/seedData.js"
+    "seed": "node dist/seedData.js",
+    "start": "node dist/index.js"
+    
   },
   "author": "",
   "license": "ISC",

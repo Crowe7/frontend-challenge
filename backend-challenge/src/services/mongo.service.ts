@@ -27,5 +27,3 @@ export async function connectToMongo() {
         console.error(err)
     }
 }
-connectToMongo();
-console.log(collections.Contact);
