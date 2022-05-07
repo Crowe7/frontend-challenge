@@ -1,4 +1,5 @@
 export interface HomeItems {
+    _id: string,
     name: string,
     title: string,
     paragraph: string,
@@ -6,6 +7,7 @@ export interface HomeItems {
 }
 
 export interface ContactItems {
+    _id: string,
     name: string,
     title: string,
     paragraph: string,

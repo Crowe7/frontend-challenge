@@ -32,7 +32,7 @@ loremRouter.get('/:page', async (req, res) => {
             throw res.status(404).send(`Unable to find a page matching ${req.params.page}`);
         }
 
-        const lorem = (await collections.Lorem?.find(loremQuery).project({_id: 0}).toArray());
+        const lorem = (await collections.Lorem?.find(loremQuery).toArray());
 
         if (lorem?.length !== 0) {
             res.status(200).send(lorem)

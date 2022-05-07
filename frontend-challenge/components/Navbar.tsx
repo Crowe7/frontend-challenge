@@ -25,7 +25,7 @@ export const Navbar = () => {
             <Box sx={{display: "flex",
                     justifyContent: "space-between", 
                     alignItems: "center",
-                    padding: 80,
+                    padding: 90,
                     height: 130,
                     '@media (max-width: 620px)': {padding: 30}
                 }}>
