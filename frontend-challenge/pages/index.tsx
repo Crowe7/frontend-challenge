@@ -7,7 +7,11 @@ import { Navbar } from '../components/Navbar'
 import styles from '../styles/Home.module.css'
 import { ContactItems, HomeItems } from '../types'
 
+
+import { arrayOne, arrayTwo, noDuplicates,  } from '../data/ArrayPuzzle'
+
 const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
+
   return (
     <div>
       <Navbar/>
