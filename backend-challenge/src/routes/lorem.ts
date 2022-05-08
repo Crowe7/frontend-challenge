@@ -8,7 +8,8 @@ loremRouter.use(express.json());
 loremRouter.get('/', async (req, res) => {
     try {
         // could typecast this.. would need to type out the lorem itself into an interface then set this to  as lorem[]!
-        const lorem = (await collections.Lorem?.find({}).toArray())
+        const lorem = (await collections.Lorem?.find({}).toArray());
+        res.status(200).send(lorem);
     } catch (err) {
         if(err instanceof Error) {
             res.status(500).send(err.message);
