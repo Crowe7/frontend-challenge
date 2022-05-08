@@ -34,6 +34,14 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
   
   return (
     <div>
+
+      <style global jsx> {`
+        html,
+        body {
+          background: {#222222}
+        }
+      `}</style>
+
       <Navbar/>
       <LoremBoxes Boxes={home} />
 
