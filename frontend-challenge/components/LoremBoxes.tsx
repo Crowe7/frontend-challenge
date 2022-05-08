@@ -63,7 +63,7 @@ export const LoremBoxes = ({Boxes}: MyProps) => {
                                     '@media (max-width: 1170px)': {paddingLeft: 35, paddingRight: 35, paddingBottom: 5, },
                                     '@media (max-width: 1000px)': {paddingLeft: 55, paddingRight: 55, paddingBottom: 25, }
                                 }} >
-                                    <Title sx={{color: "#222222"}} order={1}>{info.title}</Title>
+                                    <Title sx={{color: "#222222", fontSize: "2.2rem"}} order={2}>{info.title}</Title>
 
                                     <Text sx={{
                                                 color: "#858585", 

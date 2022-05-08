@@ -9,6 +9,7 @@ import { ContactItems, HomeItems } from '../types'
 
 
 import { arrayOne, arrayTwo, noDuplicates,  } from '../data/ArrayPuzzle'
+import { Box, Title } from '@mantine/core'
 
 const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
 
@@ -17,6 +18,14 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
       <Navbar/>
       <LoremBoxes Boxes={home} />
 
+      <Box sx={{
+        paddingLeft: 90,
+        paddingRight: 90,
+        paddingTop: 50
+
+      }}> 
+        <Title sx={{fontSize: "3.1rem"}} order={1}><span style={{ borderBottom: "4px solid #DEBF79" }}>Heading</span> One</Title>
+      </Box>
     </div>
   )
 }
@@ -25,7 +34,7 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
 // gold list dots and light text
 // same padding as everything else of course.
 
-// TODO 
+// TODO #DEBF79
 // RESPONSIVE LOREM
 // WRITE HEADING ONE AND DUPLICATES TEXT
 // RESPONSIVE HEADING ONE AND DUPLICATES TEXT
