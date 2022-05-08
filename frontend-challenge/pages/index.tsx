@@ -55,7 +55,7 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
       </Box>
       {puzzleArray.length !== 0 &&
         <List 
-          sx={{paddingLeft: 95, marginBottom: 20}}
+          sx={{paddingLeft: 95, marginBottom: 20, paddingTop: 10, '@media (max-width: 600px)': {paddingLeft: 35}}}
           size='md'
           icon={
             <ThemeIcon color="#DEBF79" sx={{backgroundColor: "#DEBF79"}} size={1} radius="xl">
