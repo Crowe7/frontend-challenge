@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -9,9 +10,16 @@ import { ContactItems, HomeItems } from '../types'
 
 
 import { arrayOne, arrayTwo, noDuplicates,  } from '../data/ArrayPuzzle'
-import { Box, Button, Text, Title } from '@mantine/core'
+import { Box, Button, List, ListItem, Text, ThemeIcon, Title } from '@mantine/core'
+import { useState } from 'react'
 
 const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
+
+  const [puzzleArray, setPuzzleArray] = useState<string[]>(arrayOne);
+
+  console.log(puzzleArray);
+
+
 
   return (
     <div>
@@ -45,6 +53,22 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
           is clicked. if the operation has been completed already, notify the user that this has already been done.
         </Text>
       </Box>
+      {puzzleArray.length !== 0 &&
+        <List 
+          sx={{paddingLeft: 95, marginBottom: 20}}
+          size='md'
+          icon={
+            <ThemeIcon color="#DEBF79" sx={{backgroundColor: "#DEBF79"}} size={1} radius="xl">
+              <img height="13" width="13" src='https://raw.githubusercontent.com/Crowe7/programming-things/main/Logo.png?token=GHSAT0AAAAAABUFL3X3I2XOHHFXVCYPCETIYTXMKNA' alt=''></img>
+            </ThemeIcon>
+          }
+        >
+          {puzzleArray.map((person) => {
+               return <List.Item key={person}>{person}</List.Item>
+            })
+          }
+        </List>
+      }
     </div>
   )
 }
@@ -54,10 +78,6 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
 // same padding as everything else of course.
 
 // TODO #DEBF79
-// RESPONSIVE LOREM
-// WRITE HEADING ONE AND DUPLICATES TEXT
-// RESPONSIVE HEADING ONE AND DUPLICATES TEXT
-// FUNCTION TO COMBINE BOTH ARRYS INTO A SET THEN DISPLAY THEM
 // NOTIFICATIONS PROVIDER SUPPORT FOR COMBINE FUNCTION
 // DISPLAY ARRAY RESULTS
 export const getStaticProps:GetStaticProps = async () => {
