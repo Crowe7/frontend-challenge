@@ -1,8 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import type { GetStaticProps, NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
 import { LoremBoxes } from '../components/LoremBoxes'
 import { Navbar } from '../components/Navbar'
 import styles from '../styles/Home.module.css'

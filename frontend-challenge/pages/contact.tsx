@@ -9,7 +9,29 @@ import { ContactItems, HomeItems } from '../types'
 const contact:NextPage = () => {
     return (
         <div>
-            <Navbar/>
+            <style global jsx> {`
+                html,
+                body {
+                    background: linear-gradient(
+                        to right, 
+                        #222222 0%, 
+                        #222222 50%, 
+                        #ffffff 50%, 
+                        #ffffff 100%
+                        );
+                    }
+                @media (max-width: 1000px) {
+                    body {
+                        background: linear-gradient(
+                            #222222 0%, 
+                            #222222 50%, 
+                            #ffffff 50%, 
+                            #ffffff 100%
+                        )
+                    }
+                }
+            `}</style>
+           <Navbar/>
         </div>
     )
 }
