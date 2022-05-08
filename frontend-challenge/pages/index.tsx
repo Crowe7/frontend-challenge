@@ -10,13 +10,25 @@ import { ContactItems, HomeItems } from '../types'
 
 
 import { arrayOne, arrayTwo, noDuplicates,  } from '../data/ArrayPuzzle'
-import { Box, Button, List, ListItem, Text, ThemeIcon, Title } from '@mantine/core'
+import { Box, Button, List, Text, ThemeIcon, Title } from '@mantine/core'
 import { useState } from 'react'
+import { NotificationProps, showNotification, updateNotification } from '@mantine/notifications'
 
 const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
 
   const [puzzleArray, setPuzzleArray] = useState<string[]>([]);
 
+
+  const updatePuzzleAndNotification = (updateArrayNotification: { (notification: NotificationProps & { id: string }): void;}) => {
+    setPuzzleArray(noDuplicates(arrayOne, arrayTwo));
+    updateArrayNotification({
+      id: "combine-arrays",
+      title: "Combined Arrays.",
+      message: `Data is displayed below!`
+    })
+    
+
+  }
 
   return (
     <div>
@@ -36,6 +48,18 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
         }}>
           Remove the duplicates in 2 Javascript arrays (found in readme), add the results to an array and output the list of distinct names in an unordered list below this paragraph when 
           <span> <Button variant='subtle'
+                    onClick={() => {
+                      showNotification({
+                        id: "combine-arrays",
+                        loading: true,
+                        message: "Combining arrays...",
+                        autoClose: false,
+                        disallowClose: true,
+                      });
+                      updatePuzzleAndNotification(updateNotification)
+
+                    }}
+
                     styles={(theme) => ({
                       root: {
                         color : '#DEBF79',
