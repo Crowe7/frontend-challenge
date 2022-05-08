@@ -12,6 +12,7 @@ export default function App(props: AppProps) {
       <Head>
         <title>Midwestern Test</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+        <link rel="icon" type="image/x-icon" href="https://i.ibb.co/LY4Bt2r/Logo.png"></link>
       </Head>
 
       <MantineProvider

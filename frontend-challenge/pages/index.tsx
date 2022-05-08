@@ -15,10 +15,7 @@ import { useState } from 'react'
 
 const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
 
-  const [puzzleArray, setPuzzleArray] = useState<string[]>(arrayOne);
-
-  console.log(puzzleArray);
-
+  const [puzzleArray, setPuzzleArray] = useState<string[]>([]);
 
 
   return (
