@@ -46,7 +46,7 @@ export const Navbar = () => {
                                 margin: 0,
                                 '&:hover': {
                                     backgroundColor: 'inherit'
-                                }
+                                },
                             }
                         })}
                         component="a">

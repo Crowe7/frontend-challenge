@@ -9,7 +9,7 @@ import { ContactItems, HomeItems } from '../types'
 
 
 import { arrayOne, arrayTwo, noDuplicates,  } from '../data/ArrayPuzzle'
-import { Box, Title } from '@mantine/core'
+import { Box, Button, Text, Title } from '@mantine/core'
 
 const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
 
@@ -21,10 +21,29 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
       <Box sx={{
         paddingLeft: 90,
         paddingRight: 90,
-        paddingTop: 50
+        paddingTop: 50,
+        '@media (max-width: 600px)': {paddingRight: 30, paddingLeft: 30}
 
       }}> 
         <Title sx={{fontSize: "3.1rem"}} order={1}><span style={{ borderBottom: "4px solid #DEBF79" }}>Heading</span> One</Title>
+        <Text sx={{
+          marginTop: "40px"
+        }}>
+          Remove the duplicates in 2 Javascript arrays (found in readme), add the results to an array and output the list of distinct names in an unordered list below this paragraph when 
+          <span> <Button variant='subtle'
+                    styles={(theme) => ({
+                      root: {
+                        color : '#DEBF79',
+                        padding: 0,
+                        margin: 0,
+                        '&:hover': {
+                          backgroundColor: 'inherit'
+                        } 
+                      }
+                    })}
+                  >this link</Button> </span>
+          is clicked. if the operation has been completed already, notify the user that this has already been done.
+        </Text>
       </Box>
     </div>
   )
