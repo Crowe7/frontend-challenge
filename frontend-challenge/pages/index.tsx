@@ -18,18 +18,23 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
 
   const [puzzleArray, setPuzzleArray] = useState<string[]>([]);
 
-
+  // callback function that updates notification after arrays are combined and displayed
   const updatePuzzleAndNotification = (updateArrayNotification: { (notification: NotificationProps & { id: string }): void;}) => {
-    setPuzzleArray(noDuplicates(arrayOne, arrayTwo));
-    updateArrayNotification({
-      id: "combine-arrays",
-      title: "Combined Arrays.",
-      message: `Data is displayed below!`
-    })
-    
 
+      setPuzzleArray(noDuplicates(arrayOne, arrayTwo));
+      updateArrayNotification({
+        id: "combine-arrays",
+        title: "Combined Arrays.",
+        message: "Data is displayed below!",
+        autoClose: 2000,
+        styles: (theme) => ({
+          root: {
+            '&::before': {backgroundColor: "#DEBF79"},
+          }
+        })
+      })
   }
-
+  
   return (
     <div>
       <Navbar/>
@@ -56,8 +61,8 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
                         autoClose: false,
                         disallowClose: true,
                       });
-                      updatePuzzleAndNotification(updateNotification)
 
+                      updatePuzzleAndNotification(updateNotification);
                     }}
 
                     styles={(theme) => ({
@@ -93,14 +98,7 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
     </div>
   )
 }
-// in state hold the 2 arrays in the readme and pass both of them into a function placed inside of the button we have to click
-// when button is clicked call the function in data and then use the notification provider to display that the operation is done?
-// gold list dots and light text
-// same padding as everything else of course.
 
-// TODO #DEBF79 
-// NOTIFICATIONS PROVIDER SUPPORT FOR COMBINE FUNCTION
-// DISPLAY ARRAY RESULTS
 export const getStaticProps:GetStaticProps = async () => {
   const homeFetch: HomeItems[] = await fetch('http://localhost:8080/lorem/Home')
     .then(res => res.json());
