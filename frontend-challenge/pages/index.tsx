@@ -59,7 +59,7 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
           size='md'
           icon={
             <ThemeIcon color="#DEBF79" sx={{backgroundColor: "#DEBF79"}} size={1} radius="xl">
-              <img height="13" width="13" src='https://raw.githubusercontent.com/Crowe7/programming-things/main/Logo.png?token=GHSAT0AAAAAABUFL3X3I2XOHHFXVCYPCETIYTXMKNA' alt=''></img>
+              <img height="13" width="13" src='https://i.ibb.co/LY4Bt2r/Logo.png' alt=''></img>
             </ThemeIcon>
           }
         >
@@ -77,7 +77,7 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
 // gold list dots and light text
 // same padding as everything else of course.
 
-// TODO #DEBF79
+// TODO #DEBF79 
 // NOTIFICATIONS PROVIDER SUPPORT FOR COMBINE FUNCTION
 // DISPLAY ARRAY RESULTS
 export const getStaticProps:GetStaticProps = async () => {
