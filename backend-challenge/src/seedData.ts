@@ -24,7 +24,7 @@ const dataToSeed = [
         name: "Contact",
         title: "Heading One",
         paragraph: "Lorem ipsum dolar sit amet, consectetur adipiscing elit, sed do dos eiusmod tempor incididunt ut labore et trace dolore magna aliqua.",
-        paragraphTwo: "arcu dictum varius duis at consectetur lore."
+        paragraphTwo: "Proin sagittis nisl rhoncus mattis rhoncus. At argue eget arcu dictum varius duis at consectetur lorem."
     }
 ];
 

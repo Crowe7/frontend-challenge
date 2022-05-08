@@ -33,7 +33,7 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
   }
   
   return (
-    <div>
+    <Box>
       <Navbar/>
 
       <LoremBoxes Boxes={home} />
@@ -92,7 +92,7 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
           }
         </List>
       }
-    </div>
+    </Box>
   )
 }
 
