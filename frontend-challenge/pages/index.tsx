@@ -34,15 +34,8 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
   
   return (
     <div>
-
-      <style global jsx> {`
-        html,
-        body {
-          background: {#222222}
-        }
-      `}</style>
-
       <Navbar/>
+
       <LoremBoxes Boxes={home} />
 
       <Box sx={{
@@ -50,7 +43,6 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
         paddingRight: 90,
         paddingTop: 50,
         '@media (max-width: 600px)': {paddingRight: 30, paddingLeft: 30}
-
       }}> 
         <Title sx={{fontSize: "3.1rem"}} order={1}><span style={{ borderBottom: "4px solid #DEBF79" }}>Heading</span> One</Title>
         <Text sx={{
@@ -108,13 +100,9 @@ export const getStaticProps:GetStaticProps = async () => {
   const homeFetch: HomeItems[] = await fetch('http://localhost:8080/lorem/Home')
     .then(res => res.json());
 
-  const contactFetch: ContactItems[]  = await fetch('http://localhost:8080/lorem/Contact')
-    .then(res => res.json());
-
     return {
       props: {
         home: homeFetch,
-        contact: contactFetch,
       },
     }
 };
