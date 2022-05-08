@@ -22,6 +22,7 @@ export async function connectToMongo() {
                 required: [ "first_name", "last_name", "title", "email", "message"],
                 additionalProperties: false,
                 properties: {
+                    _id: {},
                     first_name: {
                         bsonType: "string",
                         description: "first_name must be a string and is required"
