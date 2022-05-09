@@ -15,10 +15,14 @@ const contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
     // splitting "Heading One" up into two seperate strings so i can set a span to be the first to add the underline
     const headingSplit:string[] = contact[0].title.split(' ');
     console.log(contact);
+
+    // justify heading one center at tablet screen sizes
+    // on mobile remove gradiant and just set the form box background color to be white
+    
     return (
         <Box sx={{background: "linear-gradient(to right, #222222 0%, #222222 50%, #ffffff 50%, #ffffff 100%)",
                     height: "100vh",
-                    '@media (max-width: 1000px)': {background: "linear-gradient(#222222 0%, #222222 50%, #ffffff 50%, #ffffff 100%)"},
+                    '@media (max-width: 1150px)': {background: "linear-gradient(#222222 0%, #222222 50%, #ffffff 50%, #ffffff 100%)"},
                 }}>
            <Navbar/>
 
@@ -30,8 +34,8 @@ const contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                     paddingRight: 90,
                     marginTop: 160,
                     height: 300,
-                    width: 660
-
+                    width: 660,
+                    '@media (max-width: 1150px)': {marginTop: 20, paddingLeft: 30, paddingRight: 30},
                 }}>
                     <Title sx={{fontSize: "3.1rem"}} order={1}><span style={{ borderBottom: "4px solid #DEBF79" }}>{headingSplit[0]} </span>{headingSplit[1]}</Title>
                     <Box sx={{
@@ -39,7 +43,8 @@ const contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                         flexDirection: "column",
                         gap: 12,
                         paddingTop: 30,
-                        wordSpacing: 3
+                        wordSpacing: 3,
+                        '@media (max-width: 1150px)': {wordSpacing: 1.5},
                     }}>
                         <Text>{contact[0].paragraph}</Text>
                         <Text>{contact[0].paragraphTwo}</Text>
