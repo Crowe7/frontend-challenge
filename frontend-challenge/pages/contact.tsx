@@ -27,10 +27,20 @@ const contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
             }}>
                 <Box sx={{
                     paddingLeft: 90,
-                    paddingRight: 90
+                    paddingRight: 90,
+                    marginTop: 160,
+                    height: 300,
+                    width: 660
+
                 }}>
                     <Title sx={{fontSize: "3.1rem"}} order={1}><span style={{ borderBottom: "4px solid #DEBF79" }}>{headingSplit[0]} </span>{headingSplit[1]}</Title>
-                    <Box>
+                    <Box sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 12,
+                        paddingTop: 30,
+                        wordSpacing: 3
+                    }}>
                         <Text>{contact[0].paragraph}</Text>
                         <Text>{contact[0].paragraphTwo}</Text>
                     </Box>
