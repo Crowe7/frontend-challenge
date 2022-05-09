@@ -67,6 +67,7 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                     height: 300,
                     width: 660,
                     '@media (max-width: 1150px)': {marginTop: 20, paddingLeft: 30, paddingRight: 30},
+                    '@media (max-width: 600px)': {height: 350, width: 415},
                 }}>
                     <Title sx={{fontSize: "3.1rem"}} order={1}><span style={{ borderBottom: "4px solid #DEBF79" }}>{headingSplit[0]} </span>{headingSplit[1]}</Title>
                     <Box sx={{
