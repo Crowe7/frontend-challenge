@@ -4,6 +4,7 @@ import { Box, Button, Image} from '@mantine/core';
 import Link from 'next/link';
 
 export const Navbar = () => {
+    // Checks path so it can update the link to either home or contact according to current path 
     const router:NextRouter = useRouter();
 
     let linkInfo: {name: string, href: string} = {

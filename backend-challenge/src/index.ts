@@ -7,7 +7,7 @@ import cors from 'cors';
 const app = express();
 
 const port = process.env.PORT || 8080;
-
+// Connects to the db then runs cors so the POST method works. then uses both routers for both the POST and GET methods
 connectToMongo()
   .then(() => {
     

@@ -14,7 +14,7 @@ export async function connectToMongo() {
         console.log('Connected to Server!');
 
         const db:Db = client.db(process.env.DB_NAME);
-
+        // Sets a scheme onto the contact collection
         db.command({
             collMod: "Contact",
             validator: { $jsonSchema: {
@@ -46,7 +46,7 @@ export async function connectToMongo() {
                 }
             }}
         })
-        
+        // sets the object at the top to both of the collections to use in other files
         const loremCollection:Collection = db.collection(process.env.MIDWESTERN_SEEDED_COLLECTION_NAME);
         collections.Lorem = loremCollection;
 
@@ -60,7 +60,7 @@ export async function connectToMongo() {
     }
 }
 /*
-        first_name: string,
+    first_name: string,
     last_name: string,
     title: string,
     email: string,

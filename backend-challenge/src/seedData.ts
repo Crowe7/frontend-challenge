@@ -27,7 +27,7 @@ const dataToSeed = [
         paragraphTwo: "Proin sagittis nisl rhoncus mattis rhoncus. At argue eget arcu dictum varius duis at consectetur lorem."
     }
 ];
-
+//  Connects to server, drops all content in collection as to not add more then pushes on the data above.
 async function seedDB() {
     const uri:string = process.env.URI;
     const client:MongoClient = new MongoClient(uri);

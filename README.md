@@ -37,7 +37,9 @@ MIDWESTERN_CONTACT_COLLECTION_NAME='Collection where to store POST request data'
 // run npm run dev to check out the website on port 3000!
 
 
+// POST route is at (http://localhost:PORT/contact)
 
+// GET route is (http://localhost:PORT/lorem/PAGE) page can either be Contact or Home 
 
 
 ```
