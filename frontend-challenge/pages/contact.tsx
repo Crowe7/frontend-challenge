@@ -1,4 +1,4 @@
-import { Box, Button, Text, Textarea, TextInput, Title } from '@mantine/core'
+import { Box, Button, CSSObject, SimpleGrid, Text, Textarea, TextInput, Title } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
@@ -31,9 +31,21 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
 
         validate: {
             // from mantine docs for validating email
-            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+            // set text underneath box instead of inside.. Could remove validation/ change it to say required to make the text fit inside nicely
+            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Required Valid Email'),
         },
     });
+
+    const formInputStyles: CSSObject = {
+        input: {
+            backgroundColor: "#F5F5F5",
+            color: "#858585",
+            padding: 24,
+            "&:focus": {border: "1px solid #DEBF79 !important"}
+            
+        }
+    }
+
 
     return (
         <Box sx={{background: "linear-gradient(to right, #222222 0%, #222222 50%, #ffffff 50%, #ffffff 100%)",
@@ -70,37 +82,62 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
 
                 <Box sx={{
                     paddingRight: 90,
-                    marginTop: 140,
+                    marginTop: 80,
                     width: 630,
                     display: "flex",
                     flexDirection: "column",
 
                     
                 }}>
-                    <Title sx={{color: "#222222", fontSize: "2.2rem"}} order={2}>Heading Two</Title>
+                    <Title sx={{color: "#222222", fontSize: "2.2rem", paddingBottom: 30}} order={2}>Heading Two</Title>
                     <form onSubmit={contactForm.onSubmit((values) => console.log(values))}>
-                        <TextInput
-                            placeholder="First Name"
-                            {...contactForm.getInputProps('first_name')}
-                        />
-                        
-                        <TextInput
-                            placeholder="Last Name"
-                            {...contactForm.getInputProps('last_name')}
-                        />
+                        <SimpleGrid
+                            cols={2}
+                            spacing={"lg"}
+                        >
+                            <TextInput
 
-                        <TextInput
-                            placeholder="Title"
-                            {...contactForm.getInputProps('title')}
-                        />
+                                sx={formInputStyles}
+                                radius="xs"
+                                placeholder="First Name"
+                                {...contactForm.getInputProps('first_name')}
+                            />
+                            
+                            <TextInput
+                                sx={formInputStyles}
+                                radius="xs"                           
+                                placeholder="Last Name"
+                                {...contactForm.getInputProps('last_name')}
+                            />
 
-                        <TextInput
-                            required
-                            placeholder="Email"
-                            {...contactForm.getInputProps('email')}
-                        />
+                            <TextInput
+                                sx={formInputStyles}
+                                radius="xs"                           
+                                placeholder="Title"
+                                {...contactForm.getInputProps('title')}
+                            />
+
+                            <TextInput
+                                styles={{
+                                    error: {
+                                        color: "#800000",
+                                        
+                                    },
+                                    invalid: {
+                                        borderColor: "#800000",
+                                        color: "#858585",
+                                        "&::placeholder": {color: "#858585"}
+                                    },
+                                }}
+                                sx={formInputStyles}
+                                radius="xs"                            
+                                placeholder="Email"
+                                {...contactForm.getInputProps('email')}
+                            />
+                        </SimpleGrid>
 
                         <Textarea
+                            sx={{paddingTop: 20}}
                             placeholder="Message"
                             {...contactForm.getInputProps('message')}
                         />

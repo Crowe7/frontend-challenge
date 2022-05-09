@@ -34,7 +34,7 @@ export default function App(props: AppProps) {
               '#25262B',
               '#222222',
               '#141517',
-              '#101113',
+              '#858585',
             ],
           },
         }}
