@@ -36,6 +36,7 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
         },
     });
 
+    // so i dont have to style each input seperately.
     const formInputStyles: CSSObject = {
         input: {
             backgroundColor: "#F5F5F5",
@@ -86,8 +87,6 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                     width: 630,
                     display: "flex",
                     flexDirection: "column",
-
-                    
                 }}>
                     <Title sx={{color: "#222222", fontSize: "2.2rem", paddingBottom: 30}} order={2}>Heading Two</Title>
                     <form onSubmit={contactForm.onSubmit((values) => console.log(values))}>
@@ -137,7 +136,11 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                         </SimpleGrid>
 
                         <Textarea
-                            sx={{paddingTop: 20}}
+                            style={{paddingTop: 20, marginBottom: 20}}
+                            styles={{
+                                input: { backgroundColor: "#F5F5F5", color: "#858585", "&:focus": {border: "1px solid #DEBF79 !important"} },
+                              }}
+                            minRows={6}
                             placeholder="Message"
                             {...contactForm.getInputProps('message')}
                         />
@@ -146,18 +149,18 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                             justifyContent: "center"
                         }}>
                             <Button radius="xs" size="md" type="submit"
-                            styles={(theme) => ({
-                                root: {
-                                    fontSize: ".8rem",
-                                    color: "#FFFFFF",
-                                    backgroundColor: "#DEBF79",
-                                    paddingLeft: 30,
-                                    paddingRight: 30,
-                                    '&:hover': {
-                                        backgroundColor: theme.fn.darken('#DEBF79', 0.05),
+                                styles={(theme) => ({
+                                    root: {
+                                        fontSize: ".8rem",
+                                        color: "#FFFFFF",
+                                        backgroundColor: "#DEBF79",
+                                        paddingLeft: 40,
+                                        paddingRight: 40,
+                                        '&:hover': {
+                                            backgroundColor: theme.fn.darken('#DEBF79', 0.05),
+                                        },
                                     },
-                                },
-                            })}
+                                })}
                             >
                                 Submit
                             </Button>
