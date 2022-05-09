@@ -1,9 +1,10 @@
-import { Box, Text, Title } from '@mantine/core'
+import { Box, Button, Text, Textarea, TextInput, Title } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import { format } from 'path'
 
 
 import { Navbar } from '../components/Navbar'
@@ -25,9 +26,14 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
             last_name: '',
             title: '',
             email: '',
-            message: ''
-        }
-    })
+            message: '',
+        },
+
+        validate: {
+            // from mantine docs for validating email
+            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+        },
+    });
 
     return (
         <Box sx={{background: "linear-gradient(to right, #222222 0%, #222222 50%, #ffffff 50%, #ffffff 100%)",
@@ -38,6 +44,7 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
 
            <Box sx={{
                 display: "flex",
+                justifyContent: "space-between"
             }}>
                 <Box sx={{
                     paddingLeft: 90,
@@ -61,7 +68,65 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                     </Box>
                 </Box>
 
-                <Box></Box>
+                <Box sx={{
+                    paddingRight: 90,
+                    marginTop: 140,
+                    width: 630,
+                    display: "flex",
+                    flexDirection: "column",
+
+                    
+                }}>
+                    <Title sx={{color: "#222222", fontSize: "2.2rem"}} order={2}>Heading Two</Title>
+                    <form onSubmit={contactForm.onSubmit((values) => console.log(values))}>
+                        <TextInput
+                            placeholder="First Name"
+                            {...contactForm.getInputProps('first_name')}
+                        />
+                        
+                        <TextInput
+                            placeholder="Last Name"
+                            {...contactForm.getInputProps('last_name')}
+                        />
+
+                        <TextInput
+                            placeholder="Title"
+                            {...contactForm.getInputProps('title')}
+                        />
+
+                        <TextInput
+                            required
+                            placeholder="Email"
+                            {...contactForm.getInputProps('email')}
+                        />
+
+                        <Textarea
+                            placeholder="Message"
+                            {...contactForm.getInputProps('message')}
+                        />
+                        <Box sx={{
+                            display: "flex", 
+                            justifyContent: "center"
+                        }}>
+                            <Button radius="xs" size="md" type="submit"
+                            styles={(theme) => ({
+                                root: {
+                                    fontSize: ".8rem",
+                                    color: "#FFFFFF",
+                                    backgroundColor: "#DEBF79",
+                                    paddingLeft: 30,
+                                    paddingRight: 30,
+                                    '&:hover': {
+                                        backgroundColor: theme.fn.darken('#DEBF79', 0.05),
+                                    },
+                                },
+                            })}
+                            >
+                                Submit
+                            </Button>
+                        </Box>
+                    </form>
+                </Box>
 
             </Box>
 
