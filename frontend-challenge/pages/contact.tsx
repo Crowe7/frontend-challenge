@@ -9,7 +9,7 @@ import { format } from 'path'
 
 import { Navbar } from '../components/Navbar'
 import styles from '../styles/Home.module.css'
-import { ContactItems, HomeItems } from '../types'
+import { ContactInterface, ContactItems, HomeItems } from '../types'
 
 
 const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
@@ -47,6 +47,22 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
         }
     }
 
+    
+    const submitContact = async (body: ContactInterface ) => {
+        const res = await fetch(
+            'http://localhost:8080/contact',
+            {
+                body: JSON.stringify(body),     
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin' : '*',
+                    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                },
+                method: 'POST'
+            }
+        );
+        console.log(res.status);
+    };
 
     return (
         <Box sx={{background: "linear-gradient(to right, #222222 0%, #222222 50%, #ffffff 50%, #ffffff 100%)",
@@ -70,6 +86,7 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                     '@media (max-width: 600px)': {height: 350, width: 415},
                 }}>
                     <Title sx={{fontSize: "3.1rem"}} order={1}><span style={{ borderBottom: "4px solid #DEBF79" }}>{headingSplit[0]} </span>{headingSplit[1]}</Title>
+
                     <Box sx={{
                         display: "flex",
                         flexDirection: "column",
@@ -92,7 +109,8 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                     '@media (max-width: 1150px)': {marginTop: 0, paddingTop: 60, paddingLeft: 30, paddingRight: 30, backgroundColor: "white", width: "100vw"},
                 }}>
                     <Title sx={{color: "#222222", fontSize: "2.2rem", paddingBottom: 30}} order={2}>Heading Two</Title>
-                    <form onSubmit={contactForm.onSubmit((values) => console.log(values))}>
+
+                    <form onSubmit={contactForm.onSubmit((values) => submitContact(values))}>
                         <SimpleGrid
                             cols={2}
                             spacing={"lg"}
@@ -151,8 +169,7 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                                         '@media (max-width: 1150px)': {paddingBottom: 140},
                                     },
                               }}
-                            minRows={6}
-                            
+                            minRows={6}  
                             placeholder="Message"
                             {...contactForm.getInputProps('message')}
                         />
