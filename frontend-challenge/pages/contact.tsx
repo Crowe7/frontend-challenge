@@ -51,13 +51,14 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
     return (
         <Box sx={{background: "linear-gradient(to right, #222222 0%, #222222 50%, #ffffff 50%, #ffffff 100%)",
                     height: "100vh",
-                    '@media (max-width: 1150px)': {background: "linear-gradient(#222222 0%, #222222 50%, #ffffff 50%, #ffffff 100%)"},
+                    '@media (max-width: 1150px)': {background: "#222222"},
                 }}>
            <Navbar/>
 
            <Box sx={{
                 display: "flex",
-                justifyContent: "space-between"
+                justifyContent: "space-between",
+                '@media (max-width: 1150px)': {flexDirection: "column", justifyContent: "center", alignItems: "center"},
             }}>
                 <Box sx={{
                     paddingLeft: 90,
@@ -87,12 +88,16 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                     width: 630,
                     display: "flex",
                     flexDirection: "column",
+                    '@media (max-width: 1150px)': {marginTop: 0, paddingTop: 60, paddingLeft: 30, paddingRight: 30, backgroundColor: "white", width: "100vw"},
                 }}>
                     <Title sx={{color: "#222222", fontSize: "2.2rem", paddingBottom: 30}} order={2}>Heading Two</Title>
                     <form onSubmit={contactForm.onSubmit((values) => console.log(values))}>
                         <SimpleGrid
                             cols={2}
                             spacing={"lg"}
+                            breakpoints={[
+                                {maxWidth: 700, cols:1}
+                            ]}
                         >
                             <TextInput
 
@@ -136,11 +141,16 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                         </SimpleGrid>
 
                         <Textarea
-                            style={{paddingTop: 20, marginBottom: 20}}
+                            sx={{paddingTop: 20, marginBottom: 20}}
                             styles={{
-                                input: { backgroundColor: "#F5F5F5", color: "#858585", "&:focus": {border: "1px solid #DEBF79 !important"} },
+                                input: { 
+                                        backgroundColor: "#F5F5F5", 
+                                        color: "#858585", 
+                                        "&:focus": {border: "1px solid #DEBF79 !important"} 
+                                    },
                               }}
                             minRows={6}
+                            
                             placeholder="Message"
                             {...contactForm.getInputProps('message')}
                         />
@@ -149,6 +159,7 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                             justifyContent: "center"
                         }}>
                             <Button radius="xs" size="md" type="submit"
+                                style={{marginBottom: 50}}
                                 styles={(theme) => ({
                                     root: {
                                         fontSize: ".8rem",
