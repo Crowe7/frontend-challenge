@@ -146,7 +146,8 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                                 input: { 
                                         backgroundColor: "#F5F5F5", 
                                         color: "#858585", 
-                                        "&:focus": {border: "1px solid #DEBF79 !important"} 
+                                        "&:focus": {border: "1px solid #DEBF79 !important"},
+                                        '@media (max-width: 1150px)': {paddingBottom: 140},
                                     },
                               }}
                             minRows={6}
