@@ -18,6 +18,7 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
   // callback function that updates notification after arrays are combined and displayed
   const updatePuzzleAndNotification = (updateArrayNotification: { (notification: NotificationProps & { id: string }): void;}) => {
 
+    // Sets puzzle array into state and updates the notification provider via callback. 
       setPuzzleArray(noDuplicates(arrayOne, arrayTwo));
       updateArrayNotification({
         id: "combine-arrays",
@@ -43,22 +44,26 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
         paddingRight: 90,
         paddingTop: 50,
         '@media (max-width: 600px)': {paddingRight: 30, paddingLeft: 30}
-      }}> 
+      }}>
+
         <Title sx={{fontSize: "3.1rem"}} order={1}><span style={{ borderBottom: "4px solid #DEBF79" }}>Heading</span> One</Title>
+
         <Text sx={{
           marginTop: "40px"
         }}>
           Remove the duplicates in 2 Javascript arrays (found in readme), add the results to an array and output the list of distinct names in an unordered list below this paragraph when 
           <span> <Button variant='subtle'
                     onClick={() => {
+                      // this whole chunk could look better.
+                      // shows inital notification then runs callback to update
                       showNotification({
                         id: "combine-arrays",
                         loading: true,
                         message: "Combining arrays...",
                         autoClose: false,
                         disallowClose: true,
+                        
                       });
-
                       updatePuzzleAndNotification(updateNotification);
                     }}
 
@@ -77,6 +82,7 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
         </Text>
       </Box>
       {puzzleArray.length !== 0 &&
+        // checks if the puzzleArray state has updated then maps out the individuals onto an onordered list below.. key is set to them because they are non duplicates by default.
         <List 
           sx={{paddingLeft: 95, marginBottom: 20, paddingTop: 10, '@media (max-width: 600px)': {paddingLeft: 35}}}
           size='md'
@@ -97,6 +103,7 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
 }
 
 export const getStaticProps:GetStaticProps = async () => {
+  // sets static props for jest and calls backend API for getting the lorem text for this page then returns the props for it to be used in the component
   const homeFetch: HomeItems[] = await fetch('http://localhost:8080/lorem/Home')
     .then(res => res.json());
 

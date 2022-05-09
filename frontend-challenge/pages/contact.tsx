@@ -47,7 +47,8 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
         }
     }
 
-    
+    // could change this to be a try catch that displays a notification when info is sent...
+    // passed into the form button under its onSubmit hook from mantine 
     const submitContact = async (body: ContactInterface ) => {
         const res = await fetch(
             'http://localhost:8080/contact',
@@ -69,6 +70,7 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                     height: "100vh",
                     '@media (max-width: 1150px)': {background: "#222222"},
                 }}>
+
            <Navbar/>
 
            <Box sx={{
@@ -85,6 +87,7 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                     '@media (max-width: 1150px)': {marginTop: 20, paddingLeft: 30, paddingRight: 30},
                     '@media (max-width: 600px)': {height: 350, width: 415},
                 }}>
+
                     <Title sx={{fontSize: "3.1rem"}} order={1}><span style={{ borderBottom: "4px solid #DEBF79" }}>{headingSplit[0]} </span>{headingSplit[1]}</Title>
 
                     <Box sx={{
@@ -108,9 +111,11 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                     flexDirection: "column",
                     '@media (max-width: 1150px)': {marginTop: 0, paddingTop: 60, paddingLeft: 30, paddingRight: 30, backgroundColor: "white", width: "100vw"},
                 }}>
+
                     <Title sx={{color: "#222222", fontSize: "2.2rem", paddingBottom: 30}} order={2}>Heading Two</Title>
 
                     <form onSubmit={contactForm.onSubmit((values) => submitContact(values))}>
+
                         <SimpleGrid
                             cols={2}
                             spacing={"lg"}
@@ -119,27 +124,23 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                             ]}
                         >
                             <TextInput
-
                                 sx={formInputStyles}
                                 radius="xs"
                                 placeholder="First Name"
                                 {...contactForm.getInputProps('first_name')}
-                            />
-                            
+                            />                           
                             <TextInput
                                 sx={formInputStyles}
                                 radius="xs"                           
                                 placeholder="Last Name"
                                 {...contactForm.getInputProps('last_name')}
                             />
-
                             <TextInput
                                 sx={formInputStyles}
                                 radius="xs"                           
                                 placeholder="Title"
                                 {...contactForm.getInputProps('title')}
                             />
-
                             <TextInput
                                 styles={{
                                     error: {
@@ -157,6 +158,7 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                                 placeholder="Email"
                                 {...contactForm.getInputProps('email')}
                             />
+
                         </SimpleGrid>
 
                         <Textarea
@@ -173,6 +175,7 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                             placeholder="Message"
                             {...contactForm.getInputProps('message')}
                         />
+
                         <Box sx={{
                             display: "flex", 
                             justifyContent: "center"
@@ -206,6 +209,7 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
 }
 
 export const getStaticProps:GetStaticProps = async () => {
+    // sets static props for next and calls backend API for getting the lorem text for this page then returns the props for it to be used in the component
     const contactFetch: ContactItems[]  = await fetch('http://localhost:8080/lorem/Contact')
     .then(res => res.json());
 
