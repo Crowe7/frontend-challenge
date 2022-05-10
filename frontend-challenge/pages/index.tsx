@@ -11,7 +11,7 @@ import { Box, Button, createStyles, List, Text, ThemeIcon, Title } from '@mantin
 import { useState } from 'react'
 import { NotificationProps, showNotification, updateNotification } from '@mantine/notifications'
 import { HeadingOne } from '../components/headings/HeadingOne'
-import { ArrayPuzzleList } from '../components/arrayPuzzleList'
+import { ArrayPuzzleList } from '../components/ArrayPuzzleList'
 
 
 const useStyles = createStyles((theme) => ({
@@ -96,7 +96,7 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
       </Box>
 
       <ArrayPuzzleList People={puzzleArray} />
-      
+
     </Box>
   )
 }

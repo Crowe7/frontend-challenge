@@ -1,18 +1,68 @@
-import { Box, Button, CSSObject, SimpleGrid, Text, Textarea, TextInput, Title } from '@mantine/core'
+import { Box, Button, createStyles, CSSObject, SimpleGrid, Text, Textarea, TextInput, Title } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { format } from 'path'
+import { ContactForm } from '../components/form/ContactForm'
+import { HeadingOne } from '../components/headings/HeadingOne'
+import { HeadingTwo } from '../components/headings/HeadingTwo'
 
 
 import { Navbar } from '../components/Navbar'
 import styles from '../styles/Home.module.css'
 import { ContactInterface, ContactItems, HomeItems } from '../types'
 
+const useStyles = createStyles((theme) => ({
+    pageWrapper: {
+        background: "linear-gradient(to right, #222222 0%, #222222 50%, #ffffff 50%, #ffffff 100%)",
+        height: "100vh",
+        '@media (max-width: 1150px)': {background: "#222222"},
+    },
+
+    contentWrapper: {
+        display: "flex",
+        justifyContent: "space-between",
+        '@media (max-width: 1150px)': {flexDirection: "column", justifyContent: "center", alignItems: "center"},
+    },
+
+    textBoxWrapper: {
+        paddingLeft: 90,
+        paddingRight: 90,
+        marginTop: 160,
+        height: 300,
+        width: 660,
+        '@media (max-width: 1150px)': {marginTop: 20, paddingLeft: 30, paddingRight: 30},
+        '@media (max-width: 600px)': {height: 350, width: 415},
+    },
+
+    paragraphWrapper: {
+        display: "flex",
+        flexDirection: "column",
+        gap: 12,
+        paddingTop: 30,
+        wordSpacing: 3,
+        '@media (max-width: 1150px)': {wordSpacing: 1.5},
+    },
+
+    formHeadingWrapper: {
+        paddingBottom: 30
+    },
+
+    formWrapper: {
+        paddingRight: 90,
+        marginTop: 80,
+        width: 630,
+        display: "flex",
+        flexDirection: "column",
+        '@media (max-width: 1150px)': {marginTop: 0, paddingTop: 60, paddingLeft: 30, paddingRight: 30, backgroundColor: "white", width: "100vw"},
+    }
+}))
+
 
 const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
+    const { classes } = useStyles() 
     // ask how to do this better..
     // splitting "Heading One" up into two seperate strings so i can set a span to be the first to add the underline
     const headingSplit:string[] = contact[0].title.split(' ');
@@ -66,139 +116,27 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
     };
 
     return (
-        <Box sx={{background: "linear-gradient(to right, #222222 0%, #222222 50%, #ffffff 50%, #ffffff 100%)",
-                    height: "100vh",
-                    '@media (max-width: 1150px)': {background: "#222222"},
-                }}>
+        <Box className={classes.pageWrapper}>
 
            <Navbar/>
 
-           <Box sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                '@media (max-width: 1150px)': {flexDirection: "column", justifyContent: "center", alignItems: "center"},
-            }}>
-                <Box sx={{
-                    paddingLeft: 90,
-                    paddingRight: 90,
-                    marginTop: 160,
-                    height: 300,
-                    width: 660,
-                    '@media (max-width: 1150px)': {marginTop: 20, paddingLeft: 30, paddingRight: 30},
-                    '@media (max-width: 600px)': {height: 350, width: 415},
-                }}>
+           <Box className={classes.contentWrapper}>
+                <Box className={classes.textBoxWrapper}>
 
-                    <Title sx={{fontSize: "3.1rem"}} order={1}><span style={{ borderBottom: "4px solid #DEBF79" }}>{headingSplit[0]} </span>{headingSplit[1]}</Title>
-
-                    <Box sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 12,
-                        paddingTop: 30,
-                        wordSpacing: 3,
-                        '@media (max-width: 1150px)': {wordSpacing: 1.5},
-                    }}>
+                <HeadingOne UnderLinedText={headingSplit[0]} AfterText={headingSplit[1]} />
+                    
+                    <Box className={classes.paragraphWrapper}>
                         <Text>{contact[0].paragraph}</Text>
                         <Text>{contact[0].paragraphTwo}</Text>
                     </Box>
                 </Box>
 
-                <Box sx={{
-                    paddingRight: 90,
-                    marginTop: 80,
-                    width: 630,
-                    display: "flex",
-                    flexDirection: "column",
-                    '@media (max-width: 1150px)': {marginTop: 0, paddingTop: 60, paddingLeft: 30, paddingRight: 30, backgroundColor: "white", width: "100vw"},
-                }}>
+                <Box className={classes.formWrapper}>
+                    <Box className={classes.formHeadingWrapper}>
+                        <HeadingTwo TitleText={"Heading Two"} />                
+                    </Box>
 
-                    <Title sx={{color: "#222222", fontSize: "2.2rem", paddingBottom: 30}} order={2}>Heading Two</Title>
-
-                    <form onSubmit={contactForm.onSubmit((values) => submitContact(values))}>
-
-                        <SimpleGrid
-                            cols={2}
-                            spacing={"lg"}
-                            breakpoints={[
-                                {maxWidth: 700, cols:1}
-                            ]}
-                        >
-                            <TextInput
-                                sx={formInputStyles}
-                                radius="xs"
-                                placeholder="First Name"
-                                {...contactForm.getInputProps('first_name')}
-                            />                           
-                            <TextInput
-                                sx={formInputStyles}
-                                radius="xs"                           
-                                placeholder="Last Name"
-                                {...contactForm.getInputProps('last_name')}
-                            />
-                            <TextInput
-                                sx={formInputStyles}
-                                radius="xs"                           
-                                placeholder="Title"
-                                {...contactForm.getInputProps('title')}
-                            />
-                            <TextInput
-                                styles={{
-                                    error: {
-                                        color: "#800000",
-                                        
-                                    },
-                                    invalid: {
-                                        borderColor: "#800000",
-                                        color: "#858585",
-                                        "&::placeholder": {color: "#858585"}
-                                    },
-                                }}
-                                sx={formInputStyles}
-                                radius="xs"                            
-                                placeholder="Email"
-                                {...contactForm.getInputProps('email')}
-                            />
-
-                        </SimpleGrid>
-
-                        <Textarea
-                            sx={{paddingTop: 20, marginBottom: 20}}
-                            styles={{
-                                input: { 
-                                        backgroundColor: "#F5F5F5", 
-                                        color: "#858585", 
-                                        "&:focus": {border: "1px solid #DEBF79 !important"},
-                                        '@media (max-width: 1150px)': {paddingBottom: 140},
-                                    },
-                              }}
-                            minRows={6}  
-                            placeholder="Message"
-                            {...contactForm.getInputProps('message')}
-                        />
-
-                        <Box sx={{
-                            display: "flex", 
-                            justifyContent: "center"
-                        }}>
-                            <Button radius="xs" size="md" type="submit"
-                                style={{marginBottom: 50}}
-                                styles={(theme) => ({
-                                    root: {
-                                        fontSize: ".8rem",
-                                        color: "#FFFFFF",
-                                        backgroundColor: "#DEBF79",
-                                        paddingLeft: 40,
-                                        paddingRight: 40,
-                                        '&:hover': {
-                                            backgroundColor: theme.fn.darken('#DEBF79', 0.05),
-                                        },
-                                    },
-                                })}
-                            >
-                                Submit
-                            </Button>
-                        </Box>
-                    </form>
+                    <ContactForm submitContact={submitContact} contactForm={contactForm} />
                 </Box>
 
             </Box>
