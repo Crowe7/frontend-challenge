@@ -7,11 +7,41 @@ import { ContactItems, HomeItems } from '../types'
 
 
 import { arrayOne, arrayTwo, noDuplicates,  } from '../data/ArrayPuzzle'
-import { Box, Button, List, Text, ThemeIcon, Title } from '@mantine/core'
+import { Box, Button, createStyles, List, Text, ThemeIcon, Title } from '@mantine/core'
 import { useState } from 'react'
 import { NotificationProps, showNotification, updateNotification } from '@mantine/notifications'
+import { HeadingOne } from '../components/headings/HeadingOne'
+import { ArrayPuzzleList } from '../components/arrayPuzzleList'
+
+
+const useStyles = createStyles((theme) => ({
+  arrayPuzzleWrapper: {
+    paddingLeft: 90,
+    paddingRight: 90,
+    paddingTop: 50,
+    '@media (max-width: 600px)': {paddingRight: 30, paddingLeft: 30}
+  },
+
+  arrayDisplayButton: {
+    color : '#DEBF79',
+    padding: 0,
+    margin: 0,
+    '&:hover': {
+      backgroundColor: 'inherit'
+    } 
+  },
+
+  arrayPuzzleText: {
+    marginTop: "40px"
+  },
+
+  
+}))
+
+
 
 const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
+  const { classes} = useStyles()
 
   const [puzzleArray, setPuzzleArray] = useState<string[]>([]);
 
@@ -32,6 +62,20 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
         })
       })
   }
+
+   function arrayButtonOnClick() {
+      // this whole chunk could look better.
+      // shows inital notification then runs callback to update
+      showNotification({
+        id: "combine-arrays",
+        loading: true,
+        message: "Combining arrays...",
+        autoClose: false,
+        disallowClose: true,
+                        
+      });
+      updatePuzzleAndNotification(updateNotification);
+   }
   
   return (
     <Box>
@@ -39,71 +83,26 @@ const Home: NextPage<{home: HomeItems[]}> = ({ home }) => {
 
       <LoremBoxes Boxes={home} />
 
-      <Box sx={{
-        paddingLeft: 90,
-        paddingRight: 90,
-        paddingTop: 50,
-        '@media (max-width: 600px)': {paddingRight: 30, paddingLeft: 30}
-      }}>
+      <Box className={classes.arrayPuzzleWrapper}>
 
-        <Title sx={{fontSize: "3.1rem"}} order={1}><span style={{ borderBottom: "4px solid #DEBF79" }}>Heading</span> One</Title>
+        <HeadingOne UnderLinedText={'Heading'} AfterText={'One'} />
 
-        <Text sx={{
-          marginTop: "40px"
-        }}>
+        <Text className={classes.arrayPuzzleText}>
           Remove the duplicates in 2 Javascript arrays (found in readme), add the results to an array and output the list of distinct names in an unordered list below this paragraph when 
-          <span> <Button variant='subtle'
-                    onClick={() => {
-                      // this whole chunk could look better.
-                      // shows inital notification then runs callback to update
-                      showNotification({
-                        id: "combine-arrays",
-                        loading: true,
-                        message: "Combining arrays...",
-                        autoClose: false,
-                        disallowClose: true,
-                        
-                      });
-                      updatePuzzleAndNotification(updateNotification);
-                    }}
-
-                    styles={(theme) => ({
-                      root: {
-                        color : '#DEBF79',
-                        padding: 0,
-                        margin: 0,
-                        '&:hover': {
-                          backgroundColor: 'inherit'
-                        } 
-                      }
-                    })}
-                  >this link</Button> </span>
+            <span> <Button variant='subtle' className={classes.arrayDisplayButton} onClick={arrayButtonOnClick}>this link</Button> </span>
           is clicked. if the operation has been completed already, notify the user that this has already been done.
         </Text>
+
       </Box>
-      {puzzleArray.length !== 0 &&
-        // checks if the puzzleArray state has updated then maps out the individuals onto an onordered list below.. key is set to them because they are non duplicates by default.
-        <List 
-          sx={{paddingLeft: 95, marginBottom: 20, paddingTop: 10, '@media (max-width: 600px)': {paddingLeft: 35}}}
-          size='md'
-          icon={
-            <ThemeIcon color="#DEBF79" sx={{backgroundColor: "#DEBF79"}} size={1} radius="xl">
-              <img height="13" width="13" src='https://i.ibb.co/LY4Bt2r/Logo.png' alt=''></img>
-            </ThemeIcon>
-          }
-        >
-          {puzzleArray.map((person) => {
-               return <List.Item key={person}>{person}</List.Item>
-            })
-          }
-        </List>
-      }
+
+      <ArrayPuzzleList People={puzzleArray} />
+      
     </Box>
   )
 }
 
 export const getStaticProps:GetStaticProps = async () => {
-  // sets static props for jest and calls backend API for getting the lorem text for this page then returns the props for it to be used in the component
+  // sets static props for next and calls backend API for getting the lorem text for this page then returns the props for it to be used in the component
   const homeFetch: HomeItems[] = await fetch('http://localhost:8080/lorem/Home')
     .then(res => res.json());
 
