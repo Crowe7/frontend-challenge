@@ -67,35 +67,6 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
     // splitting "Heading One" up into two seperate strings so i can set a span to be the first to add the underline
     const headingSplit:string[] = contact[0].title.split(' ');
 
-    // justify heading one center at tablet screen sizes
-    // on mobile remove gradiant and just set the form box background color to be white
-
-    const contactForm = useForm({
-        initialValues: {
-            first_name: '',
-            last_name: '',
-            title: '',
-            email: '',
-            message: '',
-        },
-
-        validate: {
-            // from mantine docs for validating email
-            // set text underneath box instead of inside.. Could remove validation/ change it to say required to make the text fit inside nicely
-            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Required Valid Email'),
-        },
-    });
-
-    // so i dont have to style each input seperately.
-    const formInputStyles: CSSObject = {
-        input: {
-            backgroundColor: "#F5F5F5",
-            color: "#858585",
-            padding: 24,
-            "&:focus": {border: "1px solid #DEBF79 !important"}
-            
-        }
-    }
 
     // could change this to be a try catch that displays a notification when info is sent...
     // passed into the form button under its onSubmit hook from mantine 
@@ -136,7 +107,7 @@ const Contact: NextPage<{contact: ContactItems[]}> = ({contact}) => {
                         <HeadingTwo TitleText={"Heading Two"} />                
                     </Box>
 
-                    <ContactForm submitContact={submitContact} contactForm={contactForm} />
+                    <ContactForm submitContact={submitContact}/>
                 </Box>
 
             </Box>

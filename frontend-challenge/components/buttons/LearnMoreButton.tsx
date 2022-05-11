@@ -20,3 +20,4 @@ export const LearnMoreButton = () => {
     <Button className={classes.button} radius="xs" size="md">Learn More</Button>
   )
 }
+ //                     <HeadingOne UnderLinedText={headingSplit[0]} AfterText={headingSplit[1]} />
